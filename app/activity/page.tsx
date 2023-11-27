@@ -18,8 +18,8 @@ export default function Activity() {
         <p className="max-w-[700px] text-lg text-muted-foreground">
           Please select chains to view your wallet.
       </p>
-      <AddressActivityListView address={walletAddress} onChangeSelect={(chains: any)=>{
-        setChains(chains)
+      <AddressActivityListView address={walletAddress} onChangeSelect={(e: any)=>{
+        setChains(e)
       }}/>
       <Link href="/dashboard" className="w-full">
         <Button disabled={chains.length === 0}>Continue</Button>

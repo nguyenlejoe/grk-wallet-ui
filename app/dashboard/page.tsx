@@ -11,13 +11,22 @@ import {
   TabsList,
   TabsTrigger,
 } from "@/components/ui/tabs"
+import { WalletContext } from "@/lib/store";
 import {
   NFTWalletTokenListView,
   TokenBalancesListView,
   AddressActivityListView,
 } from "@covalenthq/goldrush-kit";
+import { useContext, useEffect, useState } from "react";
 
 export default function Dashboard() {
+  const {walletAddress, setChains, chains} = useContext(WalletContext);
+  const [chain_names, setChainNames] = useState([]);
+
+  useEffect(()=>{
+    setChainNames(chains.map((o: { name: any; }) => o.name))
+  },[chains])
+  
   return (
     <Tabs defaultValue="wallet-balances" className="w-full">
       <TabsList className="grid w-full grid-cols-4">
@@ -28,20 +37,14 @@ export default function Dashboard() {
       </TabsList>
       <TabsContent value="wallet-balances">
       <TokenBalancesListView
-          chain_names={[
-              "eth-mainnet",
-              "matic-mainnet",
-              "bsc-mainnet",
-              "avalanche-mainnet",
-              "optimism-mainnet",
-          ]}
+          chain_names={chain_names.length > 0 ? chain_names : ["eth-mainnet"]}
           hide_small_balances
-          address="0xfc43f5f9dd45258b3aff31bdbe6561d97e8b71de"
+          address={walletAddress}
       />
       </TabsContent>
       <TabsContent value="nft">
         <NFTWalletTokenListView
-          address="0xfc43f5f9dd45258b3aff31bdbe6561d97e8b71de"
+          address={walletAddress}
           chain_name="eth-mainnet"
         />
       </TabsContent>
@@ -56,7 +59,9 @@ export default function Dashboard() {
         </Card>
       </TabsContent>
       <TabsContent value="settings">
-        <AddressActivityListView address="0xfc43f5f9dd45258b3aff31bdbe6561d97e8b71de"/>
+        <AddressActivityListView address={walletAddress} onChangeSelect={(e: any)=>{
+          setChains(e)
+        }}/>
       </TabsContent>
     </Tabs>
   )
