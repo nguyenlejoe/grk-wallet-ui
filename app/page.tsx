@@ -1,13 +1,17 @@
 'use client'
-import Link from "next/link"
-import { siteConfig } from "@/config/site"
 import { Button, buttonVariants } from "@/components/ui/button"
 import { Flex } from "@radix-ui/themes"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
+import { useContext, useEffect } from "react"
+import { WalletContext } from "@/lib/store"
+import Link from "next/link"
 
 
 export default function IndexPage() {
+  const {walletAddress,  setWalletAddress } = useContext(WalletContext);
+  // 0x1f0CA06cB3801295AcB252F1F056Bbb9883ff5aa
+
   return (
     <section className="container flex flex-col justify-center gap-6 md:py-10 h-[calc(100vh-150px)] items-center ">
       <Flex direction="column" gap="4">
@@ -20,11 +24,16 @@ export default function IndexPage() {
         </p>
         <Flex direction="column" gap="2">
           <Label htmlFor="email">Wallet Address</Label>
-          <Input type="input" id="address" placeholder="Wallet Address" />
+          <Input type="input" id="address" placeholder="Wallet Address" value={walletAddress} onChange={(e)=>{
+            setWalletAddress(e.target.value)
+          }}/>
         </Flex>
-        <Button>
-          Continue
-        </Button>
+        <Link href="/activity">
+          <Button>
+            Continue
+          </Button>
+        </Link>
+
       </Flex>
       {/* <Flex gap="4">
         <Link

@@ -11,6 +11,7 @@ import { TailwindIndicator } from "@/components/tailwind-indicator"
 import { ThemeProvider } from "@/components/theme-provider"
 import '@radix-ui/themes/styles.css';
 import { GoldRushProvider } from "@covalenthq/goldrush-kit";
+import { WalletProvider } from "@/lib/store";
 
 // export const metadata: Metadata = {
 //   title: {
@@ -46,14 +47,17 @@ export default function RootLayout({ children }: RootLayoutProps) {
           )}
         >
           <GoldRushProvider apikey={COVALENT_API_KEY}>
-          <Theme>
-            <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-              <div className="relative flex min-h-screen flex-col">
-                <SiteHeader />
-                <div className="flex-1">{children}</div>
-              </div>
-            </ThemeProvider>
-          </Theme>
+          <WalletProvider>
+            <Theme>
+              <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+                <div className="relative flex min-h-screen flex-col">
+                  <SiteHeader />
+                  <div className="flex-1">{children}</div>
+                </div>
+              </ThemeProvider>
+            </Theme>
+          </WalletProvider>
+
           </GoldRushProvider>
 
         </body>

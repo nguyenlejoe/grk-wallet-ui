@@ -1,15 +1,10 @@
 'use client'
-import { Button } from "@/components/ui/button"
 import {
   Card,
-  CardContent,
   CardDescription,
-  CardFooter,
   CardHeader,
   CardTitle,
 } from "@/components/ui/card"
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
 import {
   Tabs,
   TabsContent,
@@ -17,16 +12,14 @@ import {
   TabsTrigger,
 } from "@/components/ui/tabs"
 import {
-  GoldRushProvider,
   NFTWalletTokenListView,
   TokenBalancesListView,
-  TokenTransfersListView,
   AddressActivityListView,
 } from "@covalenthq/goldrush-kit";
 
 export default function Dashboard() {
   return (
-    <Tabs defaultValue="wallet-balances" className="pt-8 w-full">
+    <Tabs defaultValue="wallet-balances" className="w-full">
       <TabsList className="grid w-full grid-cols-4">
         <TabsTrigger value="wallet-balances">Wallet balances</TabsTrigger>
         <TabsTrigger value="nft">NFTs</TabsTrigger>
