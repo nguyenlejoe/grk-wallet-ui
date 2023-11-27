@@ -10,7 +10,6 @@ import Link from "next/link"
 
 export default function IndexPage() {
   const {walletAddress,  setWalletAddress } = useContext(WalletContext);
-  // 0x1f0CA06cB3801295AcB252F1F056Bbb9883ff5aa
 
   return (
     <section className="container flex flex-col justify-center gap-6 md:py-10 h-[calc(100vh-150px)] items-center ">
