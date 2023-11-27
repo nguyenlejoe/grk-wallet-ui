@@ -1,18 +1,14 @@
 export type SiteConfig = typeof siteConfig
 
 export const siteConfig = {
-  name: "Next.js",
+  name: "GoldRush Wallet ",
   description:
     "Beautifully designed components built with Radix UI and Tailwind CSS.",
   mainNav: [
-    {
-      title: "Home",
-      href: "/",
-    },
+
   ],
   links: {
-    twitter: "https://twitter.com/shadcn",
-    github: "https://github.com/shadcn/ui",
+    github: "https://github.com/nguyenlejoe/grk-wallet-ui",
     docs: "https://ui.shadcn.com",
   },
 }
