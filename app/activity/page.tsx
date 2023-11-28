@@ -6,10 +6,19 @@ import {
 } from "@covalenthq/goldrush-kit";
 import { Flex } from "@radix-ui/themes";
 import Link from "next/link";
-import { useContext } from "react";
+import { useRouter } from "next/navigation";
+import { useContext, useEffect } from "react";
 
 export default function Activity() {
   const {walletAddress, setChains, chains} = useContext(WalletContext);
+  const router = useRouter();
+
+  useEffect(()=>{
+    if(!walletAddress){
+      router.push("/")
+    }
+  },[walletAddress])
+  
   return (
     <Flex direction="column" gap="4" className="w-full">
       <h1 className="text-3xl font-extrabold leading-tight tracking-tighter md:text-4xl">

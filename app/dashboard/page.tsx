@@ -18,14 +18,22 @@ import {
   AddressActivityListView,
 } from "@covalenthq/goldrush-kit";
 import { useContext, useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
 
 export default function Dashboard() {
   const {walletAddress, setChains, chains} = useContext(WalletContext);
   const [chain_names, setChainNames] = useState([]);
+  const router = useRouter();
 
   useEffect(()=>{
     setChainNames(chains.map((o: { name: any; }) => o.name))
   },[chains])
+
+  useEffect(()=>{
+    if(!walletAddress){
+      router.push("/")
+    }
+  },[walletAddress])
   
   return (
     <Tabs defaultValue="wallet-balances" className="w-full">

@@ -3,7 +3,7 @@ import { Button, buttonVariants } from "@/components/ui/button"
 import { Flex } from "@radix-ui/themes"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
-import { useContext, useEffect } from "react"
+import { useContext } from "react"
 import { WalletContext } from "@/lib/store"
 import Link from "next/link"
 
@@ -28,7 +28,7 @@ export default function IndexPage() {
           }}/>
         </Flex>
         <Link href="/activity">
-          <Button>
+          <Button disabled={walletAddress.length === 0}>
             Continue
           </Button>
         </Link>

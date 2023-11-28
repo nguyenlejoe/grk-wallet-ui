@@ -56,7 +56,6 @@ export default function RootLayout({ children }: RootLayoutProps) {
               </ThemeProvider>
             </Theme>
           </WalletProvider>
-
           </GoldRushProvider>
 
         </body>
