@@ -18,7 +18,7 @@ import {
   AddressActivityListView,
   TokenTransfersListView
 } from "@covalenthq/goldrush-kit";
-import { useContext, useEffect, useState } from "react";
+import { SetStateAction, useContext, useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { Flex } from "@radix-ui/themes";
 import { Button } from "@/components/ui/button";
@@ -55,7 +55,7 @@ export default function Dashboard() {
         <TokenBalancesListView
         chain_names={chain_names}
         address={walletAddress}
-        onTransferClick={(e)=>{
+        onTransferClick={(e: SetStateAction<string>)=>{
           setContractAddress(e)
         }}
       />

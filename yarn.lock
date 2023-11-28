@@ -220,10 +220,10 @@
     rollup-plugin-typescript2 "^0.35.0"
     typescript "^5.1.6"
 
-"@covalenthq/goldrush-kit@^0.0.8":
-  version "0.0.8"
-  resolved "https://registry.yarnpkg.com/@covalenthq/goldrush-kit/-/goldrush-kit-0.0.8.tgz#97fd49f2d969a9c65d45a1afce90a52801cf3f43"
-  integrity sha512-CcQYfIxm10WCNHbIA5vW5igxLOE37QSRe7LJTNU0pGKbYTF44x7f5m1i/XkF3Gft23YzF2lYPPcKS1pZGrqPUQ==
+"@covalenthq/goldrush-kit@^0.0.9":
+  version "0.0.9"
+  resolved "https://registry.yarnpkg.com/@covalenthq/goldrush-kit/-/goldrush-kit-0.0.9.tgz#fb11f60bc4e2acbed770efacca5c51bc152f0ecb"
+  integrity sha512-h0QCfbGxkD4n4jyQwMLkgxmURlVsw+/yh4Oo2k7uXna2lTz9R9Oqa0Si864BthWiHVBjdoIBKv3OxBPNYMn9EA==
   dependencies:
     "@covalenthq/client-sdk" "^0.6.3"
     "@headlessui/react" "^1.7.17"
@@ -4226,7 +4226,7 @@ tailwindcss-animate@^1.0.6, tailwindcss-animate@^1.0.7:
   resolved "https://registry.yarnpkg.com/tailwindcss-animate/-/tailwindcss-animate-1.0.7.tgz#318b692c4c42676cc9e67b19b78775742388bef4"
   integrity sha512-bl6mpH3T7I3UFxuvDEXLxy/VuFxBk5bbzplh7tXI68mwMokNYd1t9qPBHlnyTwfa4JGC4zP516I1hYYtQ/vspA==
 
-tailwindcss@^3.3.2:
+tailwindcss@^3.3.3:
   version "3.3.5"
   resolved "https://registry.yarnpkg.com/tailwindcss/-/tailwindcss-3.3.5.tgz#22a59e2fbe0ecb6660809d9cc5f3976b077be3b8"
   integrity sha512-5SEZU4J7pxZgSkv7FP1zY8i2TIAOooNZ1e/OGtxIEv6GltpoiXUqWvLy89+a10qYTB1N5Ifkuw9lqQkN9sscvA==
