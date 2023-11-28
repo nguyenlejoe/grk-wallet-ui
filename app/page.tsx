@@ -3,12 +3,24 @@ import { Button, buttonVariants } from "@/components/ui/button"
 import { Flex } from "@radix-ui/themes"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
-import { useContext } from "react"
+import { useContext, useEffect, useState } from "react"
 import { WalletContext } from "@/lib/store"
 import Link from "next/link"
+import { CovalentClient } from "@covalenthq/client-sdk"
+import { COVALENT_API_KEY } from "@/lib/utils"
 
 export default function IndexPage() {
   const {walletAddress,  setWalletAddress } = useContext(WalletContext);
+  const [address, setAddress] = useState(walletAddress ? walletAddress : "");
+
+  const handleResolvedAddress = async() => {
+    const client = new CovalentClient(COVALENT_API_KEY ? COVALENT_API_KEY : "");
+    const walletActivityResp =
+        await client.BaseService.getAddressActivity(
+            address.trim()
+        );
+        setWalletAddress(walletActivityResp.data.address);
+  }
 
   return (
     <section className="container flex flex-col justify-center gap-6 md:py-10 h-[calc(100vh-150px)] items-center ">
@@ -22,12 +34,14 @@ export default function IndexPage() {
         </p>
         <Flex direction="column" gap="2">
           <Label htmlFor="email">Wallet Address</Label>
-          <Input type="input" id="address" placeholder="Wallet Address" value={walletAddress} onChange={(e)=>{
-            setWalletAddress(e.target.value)
+          <Input type="input" id="address" placeholder="Wallet Address" value={address} onChange={(e)=>{
+            setAddress(e.target.value)
           }}/>
         </Flex>
-        <Link href="/activity">
-          <Button disabled={walletAddress.length === 0}>
+        <Link href="/activity" onClick={async ()=>{
+          await handleResolvedAddress()
+        }}>
+          <Button disabled={address.length === 0}>
             Continue
           </Button>
         </Link>

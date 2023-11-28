@@ -5,7 +5,7 @@ import { Metadata } from "next"
 import { Theme } from '@radix-ui/themes';
 import { siteConfig } from "@/config/site"
 import { fontSans } from "@/lib/fonts"
-import { cn } from "@/lib/utils"
+import { COVALENT_API_KEY, cn } from "@/lib/utils"
 import { SiteHeader } from "@/components/site-header"
 import { ThemeProvider } from "@/components/theme-provider"
 import '@radix-ui/themes/styles.css';
@@ -34,7 +34,6 @@ interface RootLayoutProps {
 }
 
 export default function RootLayout({ children }: RootLayoutProps) {
-  const COVALENT_API_KEY = process.env.NEXT_PUBLIC_COVALENT_API_KEY
   return (
     <>
       <html lang="en" suppressHydrationWarning>
