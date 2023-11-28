@@ -2,15 +2,13 @@
 
 import * as React from "react"
 import { Moon, Sun } from "lucide-react"
+import { useTheme } from "next-themes"
+
 import { Button } from "@/components/ui/button"
 
-interface ThemeToggleProps {
-  setTheme: Function
-  theme: "dark" | "light"
-}
+export function ThemeToggle() {
+  const { setTheme, theme } = useTheme()
 
-
-export function ThemeToggle({setTheme, theme}: ThemeToggleProps) {
   return (
     <Button
       variant="ghost"

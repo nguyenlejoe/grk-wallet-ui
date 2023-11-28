@@ -6,13 +6,7 @@ import { Icons } from "@/components/icons"
 import { MainNav } from "@/components/main-nav"
 import { ThemeToggle } from "@/components/theme-toggle"
 
-
-interface SiteHeaderProps {
-  setTheme: Function
-  theme: "dark" | "light"
-}
-
-export function SiteHeader({ setTheme, theme }: SiteHeaderProps) {
+export function SiteHeader() {
   return (
     <header className="bg-background sticky top-0 z-40 w-full border-b">
       <div className="container flex h-16 items-center space-x-4 sm:justify-between sm:space-x-0">
@@ -34,7 +28,7 @@ export function SiteHeader({ setTheme, theme }: SiteHeaderProps) {
                 <span className="sr-only">GitHub</span>
               </div>
             </Link>
-            <ThemeToggle setTheme={setTheme} theme={theme} />
+            <ThemeToggle />
           </nav>
         </div>
       </div>

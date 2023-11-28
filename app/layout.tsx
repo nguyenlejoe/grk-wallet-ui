@@ -11,7 +11,6 @@ import { ThemeProvider } from "@/components/theme-provider"
 import '@radix-ui/themes/styles.css';
 import { GoldRushProvider } from "@covalenthq/goldrush-kit";
 import { WalletProvider } from "@/lib/store";
-import {  useState } from "react";
 
 // export const metadata: Metadata = {
 //   title: {
@@ -35,7 +34,6 @@ interface RootLayoutProps {
 }
 
 export default function RootLayout({ children }: RootLayoutProps) {
-  const [theme, setTheme] = useState<"dark" | "light">("light")
   const COVALENT_API_KEY = process.env.NEXT_PUBLIC_COVALENT_API_KEY
   return (
     <>
@@ -47,19 +45,19 @@ export default function RootLayout({ children }: RootLayoutProps) {
             fontSans.variable
           )}
         >
+          <GoldRushProvider apikey={COVALENT_API_KEY ? COVALENT_API_KEY : ""}>
           <WalletProvider>
-            <GoldRushProvider apikey={COVALENT_API_KEY ? COVALENT_API_KEY : ""}  mode={theme} color="sky">
             <Theme>
               <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
                 <div className="relative flex min-h-screen flex-col">
-                  <SiteHeader setTheme={setTheme} theme={theme} />
+                  <SiteHeader />
                   <div className="flex-1">{children}</div>
                 </div>
               </ThemeProvider>
             </Theme>
-            </GoldRushProvider>
           </WalletProvider>
 
+          </GoldRushProvider>
 
         </body>
       </html>
