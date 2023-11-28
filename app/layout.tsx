@@ -9,7 +9,6 @@ import { COVALENT_API_KEY, cn } from "@/lib/utils"
 import { SiteHeader } from "@/components/site-header"
 import { ThemeProvider } from "@/components/theme-provider"
 import '@radix-ui/themes/styles.css';
-import { GoldRushProvider } from "@covalenthq/goldrush-kit";
 import { WalletProvider } from "@/lib/store";
 
 // export const metadata: Metadata = {
@@ -44,18 +43,16 @@ export default function RootLayout({ children }: RootLayoutProps) {
             fontSans.variable
           )}
         >
-          <GoldRushProvider apikey={COVALENT_API_KEY ? COVALENT_API_KEY : ""}>
-          <WalletProvider>
-            <Theme>
-              <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+          <Theme>
+            <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+              <WalletProvider>
                 <div className="relative flex min-h-screen flex-col">
                   <SiteHeader />
                   <div className="flex-1">{children}</div>
                 </div>
-              </ThemeProvider>
-            </Theme>
-          </WalletProvider>
-          </GoldRushProvider>
+              </WalletProvider>
+            </ThemeProvider>
+          </Theme>
 
         </body>
       </html>

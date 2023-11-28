@@ -1,5 +1,8 @@
+import { GoldRushProvider } from "@covalenthq/goldrush-kit";
 import type { ReactNode } from "react";
 import { createContext, useState } from "react";
+import { COVALENT_API_KEY } from "./utils";
+import { useTheme } from "next-themes";
 
 interface WalletContextType {
     walletAddress: string
@@ -21,15 +24,18 @@ interface WalletProviderProps {
 
 
 export const WalletProvider: React.FC<WalletProviderProps>= ({children}) => {
+    const { theme } = useTheme();
     const [walletAddress, setWalletAddress] = useState<string>("");
     const [chains, setChains] = useState<[]>([]);
-    const [tableState, setTableState] = useState({})
-
+    const [tableState, setTableState] = useState({});
+    const mode: any = theme;
 
     return (
-        <WalletContext.Provider value={{ walletAddress, setWalletAddress, chains, setChains, tableState, setTableState}}>
-            {children}
-        </WalletContext.Provider>
+        <GoldRushProvider apikey={COVALENT_API_KEY ? COVALENT_API_KEY : ""} mode={mode}>
+            <WalletContext.Provider value={{ walletAddress, setWalletAddress, chains, setChains, tableState, setTableState}}>
+                {children}
+            </WalletContext.Provider>
+        </GoldRushProvider>
     );
 };
 
