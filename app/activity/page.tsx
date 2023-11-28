@@ -10,7 +10,7 @@ import { useRouter } from "next/navigation";
 import { useContext, useEffect } from "react";
 
 export default function Activity() {
-  const {walletAddress, setChains, chains,  tableState, setTableState} = useContext(WalletContext);
+  const {walletAddress, setChains, chains, setTableState} = useContext(WalletContext);
   const router = useRouter();
 
   useEffect(()=>{

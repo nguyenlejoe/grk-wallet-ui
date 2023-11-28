@@ -16,13 +16,17 @@ import {
   NFTWalletTokenListView,
   TokenBalancesListView,
   AddressActivityListView,
+  TokenTransfersListView
 } from "@covalenthq/goldrush-kit";
 import { useContext, useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
+import { Flex } from "@radix-ui/themes";
+import { Button } from "@/components/ui/button";
 
 export default function Dashboard() {
   const {walletAddress, setChains, chains, tableState, setTableState} = useContext(WalletContext);
   const [chain_names, setChainNames] = useState([]);
+  const [contractAddress, setContractAddress] = useState("")
   const router = useRouter();
 
   useEffect(()=>{
@@ -46,10 +50,31 @@ export default function Dashboard() {
         <TabsTrigger value="settings">Settings</TabsTrigger>
       </TabsList>
       <TabsContent value="wallet-balances">
+        {!contractAddress 
+        ?
         <TokenBalancesListView
-          chain_names={chain_names}
+        chain_names={chain_names}
+        address={walletAddress}
+        onTransferClick={(e)=>{
+          setContractAddress(e)
+        }}
+      />
+        :
+        <Flex direction="column" gap="2">
+          <TokenTransfersListView
+          chain_name="eth-mainnet"
           address={walletAddress}
+          contract_address={contractAddress}
         />
+        <div>
+          <Button onClick={()=>{
+            setContractAddress("")
+          }}>Back to balance view</Button>
+        </div>
+        </Flex>
+
+        }
+
       </TabsContent>
       <TabsContent value="nft">
         <NFTWalletTokenListView

@@ -6,8 +6,6 @@ import { Label } from "@/components/ui/label"
 import { useContext } from "react"
 import { WalletContext } from "@/lib/store"
 import Link from "next/link"
-import { TokenBalancesListView } from "@covalenthq/goldrush-kit"
-
 
 export default function IndexPage() {
   const {walletAddress,  setWalletAddress } = useContext(WalletContext);
@@ -33,17 +31,6 @@ export default function IndexPage() {
             Continue
           </Button>
         </Link>
-        {/* <TokenBalancesListView
-        chain_names={[
-            "eth-mainnet",
-            "matic-mainnet",
-            "bsc-mainnet",
-            "avalanche-mainnet",
-            "optimism-mainnet",
-        ]}
-        hide_small_balances
-        address="0xfc43f5f9dd45258b3aff31bdbe6561d97e8b71de"
-    /> */}
       </Flex>
       {/* <Flex gap="4">
         <Link
