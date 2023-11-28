@@ -13,9 +13,11 @@ import { useRouter } from "next/navigation"
 export default function IndexPage() {
   const {walletAddress,  setWalletAddress } = useContext(WalletContext);
   const [address, setAddress] = useState(walletAddress ? walletAddress : "");
+  const [busy, setBusy] = useState(false)
   const router = useRouter();
 
   const handleResolvedAddress = async() => {
+    setBusy(true)
     const client = new CovalentClient(COVALENT_API_KEY ? COVALENT_API_KEY : "");
     const walletActivityResp =
         await client.BaseService.getAddressActivity(
@@ -23,6 +25,7 @@ export default function IndexPage() {
         );
     setWalletAddress(walletActivityResp.data.address);
     router.push("/activity")
+    setBusy(false)
   }
 
   return (
@@ -42,7 +45,7 @@ export default function IndexPage() {
           }}/>
         </Flex>
         <div>
-        <Button disabled={address.length === 0} onClick={async ()=>{
+        <Button disabled={address.length === 0 || busy} onClick={async ()=>{
             await handleResolvedAddress()
           }}>
             Continue
