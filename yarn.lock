@@ -220,10 +220,10 @@
     rollup-plugin-typescript2 "^0.35.0"
     typescript "^5.1.6"
 
-"@covalenthq/goldrush-kit@^0.1.1":
-  version "0.1.1"
-  resolved "https://registry.yarnpkg.com/@covalenthq/goldrush-kit/-/goldrush-kit-0.1.1.tgz#dcebb52fda935e0a2f80883d72b6f96f1c8b2320"
-  integrity sha512-I/ZHZgAEdousVdKa5ynV1WhkooN2NrzMG23GVu4qqYIRuJDaBk1cz5HWgOlM40fDyNCHb0Pzs08uFj517LzAew==
+"@covalenthq/goldrush-kit@^0.1.2":
+  version "0.1.2"
+  resolved "https://registry.yarnpkg.com/@covalenthq/goldrush-kit/-/goldrush-kit-0.1.2.tgz#55463f592aed941777f0212519ea6865628bcd30"
+  integrity sha512-TxjwY02fUc8tM9Fnrq6aPo1CIPBynxwlsrtr2ShdXx4zq1ribiIuWS/d0t2AVybR6q+bbVB/ukhQdQGxERtF0A==
   dependencies:
     "@covalenthq/client-sdk" "^0.6.3"
     "@headlessui/react" "^1.7.17"
