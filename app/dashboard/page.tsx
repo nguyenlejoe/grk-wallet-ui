@@ -21,12 +21,14 @@ import { useContext, useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 
 export default function Dashboard() {
-  const {walletAddress, setChains, chains} = useContext(WalletContext);
+  const {walletAddress, setChains, chains, tableState, setTableState} = useContext(WalletContext);
   const [chain_names, setChainNames] = useState([]);
   const router = useRouter();
 
   useEffect(()=>{
-    setChainNames(chains.map((o: { name: any; }) => o.name))
+    if(chains.length > 0){
+      setChainNames(chains.map((o: { name: any; }) => o.name))
+    }
   },[chains])
 
   useEffect(()=>{
@@ -37,18 +39,17 @@ export default function Dashboard() {
   
   return (
     <Tabs defaultValue="wallet-balances" className="w-full">
-      <TabsList className="grid w-full grid-cols-4">
+      <TabsList className="grid w-full grid-cols-3">
         <TabsTrigger value="wallet-balances">Wallet balances</TabsTrigger>
         <TabsTrigger value="nft">NFTs</TabsTrigger>
-        <TabsTrigger value="transactions">Transactions</TabsTrigger>
+        {/* <TabsTrigger value="transactions">Transactions</TabsTrigger> */}
         <TabsTrigger value="settings">Settings</TabsTrigger>
       </TabsList>
       <TabsContent value="wallet-balances">
-      <TokenBalancesListView
-          chain_names={chain_names.length > 0 ? chain_names : ["eth-mainnet"]}
-          hide_small_balances
+        <TokenBalancesListView
+          chain_names={chain_names}
           address={walletAddress}
-      />
+        />
       </TabsContent>
       <TabsContent value="nft">
         <NFTWalletTokenListView
@@ -67,9 +68,16 @@ export default function Dashboard() {
         </Card>
       </TabsContent>
       <TabsContent value="settings">
-        <AddressActivityListView address={walletAddress} onChangeSelect={(e: any)=>{
+        <AddressActivityListView 
+        rowSelectionState={tableState} 
+        address={walletAddress} 
+        getAllRowSelection={(e: any)=>{
           setChains(e)
-        }}/>
+        }}
+        getRowSelectionState={(e: any)=>{
+          setTableState(e)
+        }}
+        />
       </TabsContent>
     </Tabs>
   )

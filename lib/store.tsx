@@ -6,6 +6,8 @@ interface WalletContextType {
     setWalletAddress: Function
     chains: any
     setChains: Function
+    tableState: { [key: string]: boolean }
+    setTableState: Function
 }
 
 
@@ -21,10 +23,11 @@ interface WalletProviderProps {
 export const WalletProvider: React.FC<WalletProviderProps>= ({children}) => {
     const [walletAddress, setWalletAddress] = useState<string>("");
     const [chains, setChains] = useState<[]>([]);
+    const [tableState, setTableState] = useState({})
 
 
     return (
-        <WalletContext.Provider value={{ walletAddress, setWalletAddress, chains, setChains}}>
+        <WalletContext.Provider value={{ walletAddress, setWalletAddress, chains, setChains, tableState, setTableState}}>
             {children}
         </WalletContext.Provider>
     );

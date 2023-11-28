@@ -10,7 +10,7 @@ import { useRouter } from "next/navigation";
 import { useContext, useEffect } from "react";
 
 export default function Activity() {
-  const {walletAddress, setChains, chains} = useContext(WalletContext);
+  const {walletAddress, setChains, chains,  tableState, setTableState} = useContext(WalletContext);
   const router = useRouter();
 
   useEffect(()=>{
@@ -27,12 +27,23 @@ export default function Activity() {
         <p className="max-w-[700px] text-lg text-muted-foreground">
           Please select chains to view your wallet.
       </p>
-      <AddressActivityListView address={walletAddress} onChangeSelect={(e: any)=>{
-        setChains(e)
-      }}/>
-      <Link href="/dashboard" className="w-full">
-        <Button disabled={chains.length === 0}>Continue</Button>
-      </Link>
+      <AddressActivityListView 
+        address={walletAddress}
+        getAllRowSelection={(e: any)=>{
+          setChains(e)
+        }}
+        getRowSelectionState={(e: any)=>{
+          setTableState(e)
+        }}
+      />
+      <Flex gap="2">
+        <Link href="/">
+          <Button disabled={chains.length === 0}>Back</Button>
+        </Link>
+        <Link href="/dashboard">
+          <Button disabled={chains.length === 0}>Continue</Button>
+        </Link>
+      </Flex>
     </Flex>
   )
 }
