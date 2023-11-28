@@ -8,10 +8,12 @@ import { WalletContext } from "@/lib/store"
 import Link from "next/link"
 import { CovalentClient } from "@covalenthq/client-sdk"
 import { COVALENT_API_KEY } from "@/lib/utils"
+import { useRouter } from "next/navigation"
 
 export default function IndexPage() {
   const {walletAddress,  setWalletAddress } = useContext(WalletContext);
   const [address, setAddress] = useState(walletAddress ? walletAddress : "");
+  const router = useRouter();
 
   const handleResolvedAddress = async() => {
     const client = new CovalentClient(COVALENT_API_KEY ? COVALENT_API_KEY : "");
@@ -19,7 +21,8 @@ export default function IndexPage() {
         await client.BaseService.getAddressActivity(
             address.trim()
         );
-        setWalletAddress(walletActivityResp.data.address);
+    setWalletAddress(walletActivityResp.data.address);
+    router.push("/activity")
   }
 
   return (
@@ -38,32 +41,15 @@ export default function IndexPage() {
             setAddress(e.target.value)
           }}/>
         </Flex>
-        <Link href="/activity" onClick={async ()=>{
-          await handleResolvedAddress()
-        }}>
-          <Button disabled={address.length === 0}>
+        <div>
+        <Button disabled={address.length === 0} onClick={async ()=>{
+            await handleResolvedAddress()
+          }}>
             Continue
           </Button>
-        </Link>
+        </div>
+
       </Flex>
-      {/* <Flex gap="4">
-        <Link
-          href={siteConfig.links.docs}
-          target="_blank"
-          rel="noreferrer"
-          className={buttonVariants()}
-        >
-          Documentation
-        </Link>
-        <Link
-          target="_blank"
-          rel="noreferrer"
-          href={siteConfig.links.github}
-          className={buttonVariants({ variant: "outline" })}
-        >
-          GitHub
-        </Link>
-      </Flex> */}
     </section>
   )
 }
