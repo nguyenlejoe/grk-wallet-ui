@@ -1,30 +1,45 @@
 'use client'
-import { Button, buttonVariants } from "@/components/ui/button"
+import { Button } from "@/components/ui/button"
 import { Flex } from "@radix-ui/themes"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { useContext, useEffect, useState } from "react"
 import { WalletContext } from "@/lib/store"
-import Link from "next/link"
 import { CovalentClient } from "@covalenthq/client-sdk"
 import { COVALENT_API_KEY } from "@/lib/utils"
 import { useRouter } from "next/navigation"
+import { useToast } from "@/components/ui/use-toast"
 
 export default function IndexPage() {
   const {walletAddress,  setWalletAddress } = useContext(WalletContext);
   const [address, setAddress] = useState(walletAddress ? walletAddress : "");
   const [busy, setBusy] = useState(false)
   const router = useRouter();
+  const { toast } = useToast()
+
 
   const handleResolvedAddress = async() => {
     setBusy(true)
     const client = new CovalentClient(COVALENT_API_KEY ? COVALENT_API_KEY : "");
-    const walletActivityResp =
-        await client.BaseService.getAddressActivity(
-            address.trim()
-        );
-    setWalletAddress(walletActivityResp.data.address);
-    router.push("/activity")
+        try {
+          const walletActivityResp =
+          await client.BaseService.getAddressActivity(
+              address.trim()
+          );
+          if(walletActivityResp.error){
+            toast({
+              variant: "destructive",
+              title: "Something went wrong.",
+              description: walletActivityResp.error_message
+            })
+          }
+          setWalletAddress(walletActivityResp.data.address);
+          router.push("/activity")
+
+
+      } catch (exception) {
+          console.log(exception)
+      }
     setBusy(false)
   }
 
