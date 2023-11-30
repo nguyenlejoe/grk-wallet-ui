@@ -40,7 +40,7 @@ export default function Activity() {
         <Link href="/">
           <Button disabled={chains.length === 0}>Back</Button>
         </Link>
-        <Link href="/dashboard">
+        <Link href="/dashboard/balance">
           <Button disabled={chains.length === 0} >Continue</Button>
         </Link>
       </Flex>

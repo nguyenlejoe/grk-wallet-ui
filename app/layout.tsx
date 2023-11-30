@@ -1,32 +1,13 @@
 'use client'
 import "@/styles/globals.css"
 import "@covalenthq/goldrush-kit/styles.css";
-import { Metadata } from "next"
 import { Theme } from '@radix-ui/themes';
-import { siteConfig } from "@/config/site"
 import { fontSans } from "@/lib/fonts"
-import { COVALENT_API_KEY, cn } from "@/lib/utils"
+import { cn } from "@/lib/utils"
 import { SiteHeader } from "@/components/site-header"
 import { ThemeProvider } from "@/components/theme-provider"
 import '@radix-ui/themes/styles.css';
 import { WalletProvider } from "@/lib/store";
-
-// export const metadata: Metadata = {
-//   title: {
-//     default: siteConfig.name,
-//     template: `%s - ${siteConfig.name}`,
-//   },
-//   description: siteConfig.description,
-//   themeColor: [
-//     { media: "(prefers-color-scheme: light)", color: "white" },
-//     { media: "(prefers-color-scheme: dark)", color: "black" },
-//   ],
-//   icons: {
-//     icon: "/favicon.ico",
-//     shortcut: "/favicon-16x16.png",
-//     apple: "/apple-touch-icon.png",
-//   },
-// }
 
 interface RootLayoutProps {
   children: React.ReactNode
